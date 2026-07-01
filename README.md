@@ -134,18 +134,6 @@ The implementation uses the following strategies to "codify" the rigor required 
 3. **Domain Knowledge via Skills:** Skills are used to provide crucial domain knowledge to agents.
 4. **Multi-LLM Strategy to Reduce Bias:** To mitigate LLM bias, the **Investment Thesis Analyst** uses **Anthropic Claude Sonnet**, while all other agents use **Google Gemini Pro**. Separating the generation of arguments (Gemini) from the final evaluation (Claude) helps ensure objective decision-making.
 
-### Project Organization
-
-```text
-equity_analyst
-|_ sub_agents
-   |_ research_agent
-   |_ financials_review_agent
-   |_ bear_agent
-   |_ bull_agent
-   |_ investment_thesis_agent
-```
-
 ## 🔮 Future Work
 
 This prototype serves as a foundation that can easily be extended:
