@@ -55,10 +55,20 @@ ALPHAVANTAGE_API_KEY=[YOUR_ALPHAVANTAGE_API_KEY]
 
 **Tip**: The project is configured to use Google Gemini Pro and Anthropic Claude Sonnet. These models require billing setup with Google and Anthropic respectively. If you don't have billing accounts with Google and/or Anthropic, you can modify the root agent and **each** sub-agent `agent.py` file to use a free model, e.g. `gemini-flash-latest`. If changing the `investment_thesis_agent` sub-agent to a Gemini-family model, remember to **remove** the `LiteLlm` wrapper.
 
+### Web Deployment
+
+The web prototype mentioned above is deployed as follows:
+
+* The [Google ADK API Server](https://adk.dev/runtime/api-server/) is used as a REST-based inferface to the agent system.
+* Nginx is configured on the server to reverse proxy client requests to the API Server.
+* The web client is configured to send requests to the Nginx `server_name`. The web client is standard HTML, CSS, and JavaScript and located in the `web_client` folder of the repo. When deploying the web client, remember to modify `app.js` with your server URL and agent name (i.e. if you change the agent folder name to something else).
+
+```javascript
+const API_BASE_URL = '[YOUR_SERVER_URL]';
+const APP_NAME = '[YOUR_APP_NAME]';
+```
 
 > **IMPORTANT:** *Patience is virtue!* The agent can take 5 or more minutes to generate a report.
-
----
 
 ## 🧠 Architecture & Business Workflow
 
