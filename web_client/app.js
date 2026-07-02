@@ -1,5 +1,5 @@
 const API_BASE_URL = '[YOUR_SERVER_URL]';
-const APP_NAME = '[YOUR_APP_NAME]';
+const APP_NAME = '[YOUR_AGENT_NAME]';
 
 let currentUserId = null;
 let currentSessionId = null;
@@ -73,7 +73,6 @@ chatForm.addEventListener('submit', async (e) => {
     const thinkingId = showThinkingIndicator();
     
     let isThinking = true;
-    let streamCompleted = false;
     let fullAgentText = '';
     let agentMessageWrapper = null;
 
@@ -120,19 +119,14 @@ chatForm.addEventListener('submit', async (e) => {
                         continue;
                     }
 
-                    if (dataStr === '[DONE]') {
-                        streamCompleted = true;
-                        boundary = buffer.indexOf('\n\n');
-                        continue;
-                    }
-
                     try {
                         const data = JSON.parse(dataStr);
+                        // console.log(data);
                         const parts = data.content?.parts || [];
                         const role = data.content?.role;
                         const isPartial = data.partial;
 
-                        if (role === 'model' && isPartial) {
+                        if (role === 'model' && isPartial) {                           
                             for (const part of parts) {
                                 if (part.text) {
                                     if (isThinking) {
@@ -157,28 +151,21 @@ chatForm.addEventListener('submit', async (e) => {
             }
         }
 
-        if (isThinking && streamCompleted) {
+        if (isThinking) {
             removeThinkingIndicator(thinkingId);
             appendMessage('agent', "**Error:** The agent finished its process but returned no text.");
-        } else if (streamCompleted) {
+        } else {
             conversationHistory.push({ role: 'agent', text: fullAgentText });
         }
-
     } catch (error) {
         console.error("Query Error:", error);
-        
-        if (!streamCompleted) {
-            if (isThinking) {
-                removeThinkingIndicator(thinkingId);
-                appendMessage('agent', "⏱️ **Status:** I am currently running a deep data analysis (e.g., querying external financial tools). This is taking a bit longer than usual, but **I am still working on it in the background.**<br><br>Feel free to wait a moment and ask me: *'What is the status of my previous request?'*");
-            } else {
-                agentMessageWrapper.innerHTML += "<br><br>*(Connection interrupted: I am continuing this heavy analysis in the background. Please ask for an update in a minute or two!)*";
-                conversationHistory.push({ role: 'agent', text: fullAgentText + "\n\n*(Connection interrupted)*" });
-                scrollToBottom();
-            }
-        } else {
+        if (isThinking) {
             removeThinkingIndicator(thinkingId);
             appendMessage('agent', "**Error:** I'm having trouble connecting right now, or the connection dropped. Please try again.");
+        } else {
+            agentMessageWrapper.innerHTML += "<br><br>*(Connection interrupted: I am continuing this heavy analysis in the background. Please ask for an update in a minute or two!)*";
+            conversationHistory.push({ role: 'agent', text: fullAgentText + "\n\n*(Connection interrupted)*" });
+            scrollToBottom();
         }
     } finally {
         userInput.disabled = false;
