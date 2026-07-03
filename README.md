@@ -25,6 +25,7 @@ You can try the live **Equity Analyst** here: [https://equityanalyst.pictureinth
 1. **Tip:** The system produces higher-quality, tailored reports when you tell the agents exactly what to focus on. 
 * ❌ *Instead of:* `I want you to generate a report for IBM Corporation (IBM)`
 * ✅ *Try:* `I want you to generate a report for IBM Corporation (IBM). I want you to pay particular attention to (1) the company's growth-by-acquisition strategy, (2) declining relevance of the IBM Consulting segment with increasing AI adoption, and (3) management's claim of delivery of a large-scale, fault-tolerant quantum computer by 2029.`
+2. **Tip:** The **Equity Analyst** uses the AlphaVantage MCP server to retrieve historical financial information. The AlphaVantage server will sometimes return limited or no data due to rate limits. If this happens, please try your request again after a few minutes.
 
 ### Local Deployment
 
@@ -68,7 +69,7 @@ const API_BASE_URL = '[YOUR_SERVER_URL]';
 const APP_NAME = '[YOUR_APP_NAME]';
 ```
 
-> **IMPORTANT:** *Patience is virtue!* The agent can take 5 or more minutes to generate a report.
+> **NOTE:** *Patience is virtue!* The agent can take 5 or more minutes to generate a report.
 
 ## 🧠 Architecture & Business Workflow
 
