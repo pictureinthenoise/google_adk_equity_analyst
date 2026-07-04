@@ -142,3 +142,7 @@ This prototype serves as a foundation that can easily be extended:
 * **Workflow Customization:** The business workflow can be modified to map exactly to the proprietary workflows of specific hedge funds or investment firms.
 * **Deeper Domain Skills:** Skills can be expanded to codify deeper domain knowledge, e.g. industry-specific or sub-industry-specific knowledge.
 * **Additional MCP Integrations:** Additional data provider integrations will provide the system with a richer data set for analysis.
+
+## License
+
+Licensed under the Apache License, Version 2.0. See `LICENSE` file in this repository.
