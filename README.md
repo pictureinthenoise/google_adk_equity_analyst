@@ -16,7 +16,7 @@ This project implements the **Google Agent Development Kit (ADK)** to create an 
 
 ### Web Prototype
 
-You can try the live **Equity Analyst** here: [https://equityanalyst.pictureinthenoise.com](https://equityanalyst.pictureinthenoise.com)
+You can try the live **Equity Analyst** here: [https://equityanalyst.pictureinthenoise.com](https://equityanalyst.pictureinthenoise.com) **Update (2026-09-23)**: The live prototype is no longer available. Please use the repository files to stand up your own instance of the project.
 
 ##### Figure 1 - Google ADK Equity Analyst agent running on the web
 
